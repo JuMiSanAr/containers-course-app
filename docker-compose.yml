@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  backend:
+    image: backend:latest
+    build: ./backend/python/
+    volumes:
+      # With these volumes set up and restart: always,
+      # any changes to the backend will be seen in real time
+      # (for example, modifying data.json).
+      - ./backend/python/:/usr/src/app/
+      - ./backend/data.json:/etc/backend/data.json
+    restart: always
+  frontend:
+    image: frontend:latest
+    build: ./frontend/
+    ports:
+      - "8080:80"
+
+# See branch "docker_compose" in the containers example repo
+# for details on environment variables or volumes.
